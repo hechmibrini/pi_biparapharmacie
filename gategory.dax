@@ -1,0 +1,11 @@
+Category Group (Top 4 + Others) = 
+VAR CurrentCat = SELECTEDVALUE('public Dim_Produit'[Category])
+VAR Ranked = 
+    RANKX(
+        ALL('public Dim_Produit'),
+        [Total Revenue TTC],
+        , DESC,
+        Dense
+    )
+RETURN
+    IF(Ranked <= 4, CurrentCat, "Others")
